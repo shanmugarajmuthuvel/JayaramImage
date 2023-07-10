@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatic Image Slider</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+   
+  </head>
+  <body>
+    <section class="wrapper">
+      <i class="fa-solid fa-arrow-left button" id="prev"></i>
+      <div class="image-container">
+        <div class="carousel">
+          <img src="image/jayaram3.jpg" alt="" / width="100%">
+          <img src="image/jayarm.jpg" alt="" />
+          <img src="image/jayram2.jpg" alt="" />
+          <img src="image/jayram3.enc" alt="" />
+		   <img src="image/jayram3.enc" alt="" />
+		    <img src="image/jayram3.enc" alt="" />
+		   <img src="image/jayram3.enc" alt="" />
+        </div>
+        <i class="fa-solid fa-arrow-right button" id="next"></i>
+      </div>
+    </section>
+	 <script>
+	   const wrapper=document.querySelector(".wrapper")
+	   const icon=document.querySelectorAll("i")
+	   const container=document.querySelector(".image-container")
+	   const carousel=document.querySelector(".carousel")
+	   const image=document.querySelectorAll("img")
+	   let imageindex=1,
+	   intervalid;
+	   const autoslide=()=>{
+	      intervalid=setInterval(()=>{
+		      slideimage(++imageindex)
+		  },2000)
+	   }
+	   autoslide()
+	   const slideimage=()=>{
+	      imageindex=imageindex===image.length ? 0 :imageindex < 0 ? image.length-1:imageindex
+	      carousel.style.transform = `translate(-${imageindex *100}%)`;
+	   }
+	   wrapper.addEventListener("mousemove",()=>{
+	          clearInterval(intervalid)
+	   })
+	   wrapper.addEventListener("mouseleave",()=>{
+	          autoslide()
+	   })
+	   icon.forEach(button=>{
+	   button.addEventListener("click",(event)=>{
+	         clearInterval(intervalid)
+	         imageindex+=event.target.id==="next" ? 1:-1
+			 slideimage(imageindex)
+	      })
+	   })
+	 </script>
+  </body>
+</html>
